@@ -1,4 +1,5 @@
 import React, { Component }  from "react";
+import { Link } from "react-router-dom";
 
 
 export default class Users extends Component {
@@ -54,7 +55,9 @@ export default class Users extends Component {
                     <tbody>
                         {this.state.usuarios.filter(user=> user.exibir).map(user=>(
                             <tr key={user.id}>
-                                <td>{user.nome}</td>    
+                                <td>
+                                    <Link to={"/users/" + user.nome}>{user.nome}</Link>
+                                </td>    
                                 <td>{user.email}</td>
                                 <td>{user.idade}</td>
                                 <td><a href="#" onClick={event => this.removerUser(user.id)}>Remover</a></td>
