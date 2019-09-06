@@ -1,57 +1,77 @@
-import React,{ Component} from 'react'
+import React, { Component } from 'react'
 import fetch from 'isomorphic-unfetch'
+import Nav from '../components/nav'
 
-class Buscar extends Component{
-  constructor(){
-      super();
-      this.buscarTag.bind(this);
-      this.render.bind(this);
-      fetch(`api/discussions/git`)
-    .then(response => response.json())
-    .then(d => {
-        this.state = {listTags: d}
-        console.log(this.state);
-    })
-    .catch(e => this.setState({listTags: []}))
+class Buscar extends Component {
+  constructor() {
+    super();
+    this.buscarTag = this.buscarTag.bind(this);
+    this.state = {
+      listTags: [],
+      valorConsulta: ''
+    }
   }
-  buscarTag(){
-      console.log(this);
-      console.log('buscar tag');
-    fetch(`api/discussions/git`)
-    .then(response => response.json())
-    .then(d => {
-        console.log(this)
-        this.setState({listTags: d});
-    })
-    .catch(e => this.setState({listTags: []}))
+  componentDidMount() {
+    this.buscarTag(this.state.valorConsulta);
   }
-  render(){
-      return(
+  buscarTag(element) {
+    let tag = 'javascript';
+    if (element != '') {
+      tag = element.target.value
+      console.log(this.state.valorConsulta);
+    }
+    fetch(`api/discussions/${tag}`)
+      .then(response => response.json())
+      .then(function (d) {
+        this.setState({ listTags: d });
+      }.bind(this))
+      .catch(function (e) {
+        this.setState({ listTags: [] })
+      }.bind(this))
+  }
+  render() {
+    return (
+      <div>
+        <Nav />
         <div className='hero'>
-        <h1 className='title'>Buscar Tag</h1>
-        <p className='description'>
+          <h1 className='title'>Buscar Tag</h1>
+          <p className='description'>
             Digite a tag que deseja buscar.
         </p>
 
-        <div clasName="container-buscar">
-            <input type="text" id="tag" />
-            <input type="button" id="pesquisa" value="Buscar" onClick={this.buscarTag} />
-        </div>
-        <div className="container-tags">
+          <div className="container-buscar">
+            <input type="text" id="tag" onChange={this.buscarTag.bind(this)} placeholder="Ex.: javascript" />
+          </div>
+          <div className="container-tags">
             <ul>
-              {console.log(this.state)}
-                {this.state.listTags.map(function(tag){
-                   return(
-                    <li>{tag.data.selftext}</li>
-                   )   
-                }) }
+              {this.state.listTags.map(function (tag) {
+                console.log({ tag });
+                return (
+                  <li>{tag.data.title}</li>
+                )
+              })}
             </ul>
-        </div>
-        <style jsx>{`   
+          </div>
+          <style jsx>{`   
               .hero {
                 width: 100%;
                 color: #333;
               }
+              ul{
+                list-style-type: decimal;
+              }
+              .container-tags{
+                margin-left: 68px;
+              }
+              .container-buscar{
+                margin: 0 auto;
+                height: 70px;
+                width: 50%;
+              }
+              .container-buscar > input{
+                width: 100%;
+                height: 18px;
+               }
               .title {
                 margin: 0;
                 width: 100%;
@@ -64,12 +84,13 @@ class Buscar extends Component{
                 text-align: center;
               }
           `}
-        </style>
-    </div>
-      )
+          </style>
+        </div>
+      </div>
+    )
   }
 }
-   
+
 
 
 

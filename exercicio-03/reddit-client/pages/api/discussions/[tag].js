@@ -5,7 +5,7 @@ const Reddit =(req, res)=>{
         query : {tag}
     } = req
     
-    fetch(`https://www.reddit.com/r/${tag}.json?sort=top&t=day&limit=3`)
+    fetch(`https://www.reddit.com/r/${tag}.json?sort=top&t=day`)
     .then(response=>response.json())
     .then(d=>{
         res.end(JSON.stringify(d.data.children))
