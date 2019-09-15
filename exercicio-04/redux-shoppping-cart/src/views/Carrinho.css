@@ -1,0 +1,23 @@
+.Carrinho-detail-image {
+    float: left;
+}
+
+.Carrinho-detail-content {
+    float: left;
+    padding-left: 13px;
+}
+.Carrinho-detail-button{
+    flex: 0 0 10%;
+}
+
+.Carrinho-detail {
+    width: 430px !important;
+    flex: none;
+    margin-left: 25%;
+}
+.row.cart-item {
+    margin-bottom: 20px;
+}
+.cart-price {
+    margin-left: 25%;
+}
