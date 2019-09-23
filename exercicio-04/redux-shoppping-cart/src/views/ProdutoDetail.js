@@ -6,16 +6,12 @@ import "./ProdutoDetail.css"
 class ProdutoDetail extends React.Component {
 
     componentDidMount(){
-        console.log("Iniciando")
         const [id] = this.props.match.params.id;
         this.props.dispatch(Product.getProductsById(id));
     }
 
     render(){
         const { error, loading, products } = this.props;
-        console.log("iniciando Render: ");
-        console.log(loading)
-        console.log(this.props.products);
         if(error){
             return <div>Ocorreu um erro ao buscar o produto: {error}</div>
         }
