@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import { combineReducers, createStore,applyMiddleware } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { Provider } from "react-redux";
-import logo from './logo.svg';
 import './App.css';
 import ProdutoList from './views/ProdutoList'
 import Carrinho from './views/Carrinho'
 import Nav from './components/nav'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import thunk from "redux-thunk";
-import ProdutoDetail from './views/ProdutoDetail';
-import produtoReducer from './reducers/produtoReducer';
-import produtoDetailReducer from './reducers/produtoDetailReducer'
+import ProdutoDetail from './views/ProdutoDetail'; 
+import carrinhoReducer from './reducers/carrinhoReducer'
 
 const reducers = combineReducers({
-    produtoReducer,
-    produtoDetailReducer
+  car: carrinhoReducer
 });
 
 function Index() {
@@ -28,7 +24,7 @@ function Index() {
 class App extends Component {
   render() {
     return (
-      <Provider store={createStore(reducers,applyMiddleware(thunk))}>
+      <Provider store={createStore(reducers)}>
       <div className="App">
         <Router>
           <div>
@@ -38,8 +34,8 @@ class App extends Component {
             <Nav />
             <Route path="/" exact component={Index} />
             <Route path="/prod" exact component={ProdutoList} />
-            <Route path="/prod/:id" exact component={ProdutoDetail} />
-            <Route path="/cart" exact component={Carrinho} />
+            <Route path="/prod/:id" component={ProdutoDetail} />
+            <Route path="/cart" component={Carrinho} />
           </div>
         </Router>
       </div>

@@ -1,46 +1,35 @@
 import React from 'react';
+import CarrinhoItem from '../components/carrinhoItem'
+import { connect } from "react-redux";
 import "./Carrinho.css"
 
-function Carrinho(props) {
-    return (
-        <div className="container">
-            <div className="row cart-item" >
-                <div className="col-8 Carrinho-detail">
-                        <div className="Carrinho-detail-image">
-                            <img src="http://lorempixel.com/100/100/" ></img>
-                        </div>
-                        <div className="Carrinho-detail-content">
-                            <h3>Product title</h3>
-                            <span>Price: $1977.00</span>
-                        </div>
-                </div>
-                <div className="col-4 Carrinho-detail-button">
-                    <div className="Carrinho-detail-btn">
-                        <input className="btn btn-info"  type="button" value="Remover" />   
-                    </div>
-                </div>
-            </div>
-            <div className="row cart-item">
-                <div className="col-8 Carrinho-detail">
-                        <div className="Carrinho-detail-image">
-                            <img src="http://lorempixel.com/100/100/" ></img>
-                        </div>
-                        <div className="Carrinho-detail-content">
-                            <h3>Product title</h3>
-                            <span>Price: $1977.00</span>
-                        </div>
-                </div>
-                <div className="col-4 Carrinho-detail-button">
-                    <div className="Carrinho-detail-btn">
-                        <input className="btn btn-info"  type="button" value="Remover" />   
-                    </div>
+class Carrinho extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {total:0};
+    }
+   
+    render(){
+        return (
+            <div className="container">
+                {this.props.value != undefined &&
+                     this.props.value.products.map(function(value){
+                        return <CarrinhoItem item ={value}/> 
+                     })
+                }          
+                <div className="cart-price">
+                    <span>Total Price: {this.props.value.products.reduce((x,y)=>x + y.price,0).toFixed(2)}</span>
                 </div>
             </div>
-            <div className="cart-price">
-                <span>Total Price:</span>
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
-export default Carrinho;
+function mapStateToProps(state){
+    return{
+        value: state.car
+    }
+}
+
+export default connect(mapStateToProps)(Carrinho);
+

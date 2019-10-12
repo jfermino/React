@@ -9,6 +9,9 @@
 .Carrinho-detail-button{
     flex: 0 0 10%;
 }
+.Carrinho-detail-image img {
+    width: 100px;
+}
 
 .Carrinho-detail {
     width: 430px !important;
