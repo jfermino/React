@@ -1,0 +1,9 @@
+section.versao {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 20px;
+}
+section.versao:nth-child(even) {
+    background-color: #f3f5f6;
+}

@@ -1,0 +1,13 @@
+.car-item-content__image img{
+    width: 330px;
+}
+.car-item-content__text {
+    padding-left: 30px;
+}
+.car-item-content__link{
+    cursor: pointer;
+}
+/* .car-item:active {
+    border-style: dotted;
+    border-color: darkgrey;
+} */
