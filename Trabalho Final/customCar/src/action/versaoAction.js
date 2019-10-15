@@ -1,10 +1,8 @@
-export const VERSAO_LISTAR = "LISTAR";
 export const VERSAO_ADD = "ADD"
 
-export function selecionarVersao(idModelo){
-    console.log("ACTION Listar modelo");
+export function selecionarVersao(versao){
     return{
-        type: VERSAO_LISTAR,
-        payload:idModelo
+        type: VERSAO_ADD,
+        payload: versao
     }
 }

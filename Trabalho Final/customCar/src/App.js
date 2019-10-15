@@ -6,12 +6,15 @@ import Nav from './components/nav'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Modelo from './views/modelo';
 import Versao from './views/versao';
+import Cor from './views/cor';
 import modeloReducer from './reducers/modeloReducer';
 import versaoReducer from './reducers/versaoReducer';
+import corReducer from './reducers/corReducer'
 
 const reducers = combineReducers({
     modelo : modeloReducer,
-    versao: versaoReducer
+    versao: versaoReducer,
+    cor: corReducer
 });
 
 class App extends Component {
@@ -27,6 +30,7 @@ class App extends Component {
             <Nav />
             <Route path="/" exact component={Modelo} />
             <Route path="/versao/:id" exact component={Versao} />
+            <Route path="/cor" exact component={Cor} />
             {/* <Route path="/prod" exact component={ProdutoList} />
             <Route path="/prod/:id" component={ProdutoDetail} />
             <Route path="/cart" component={Carrinho} /> */}

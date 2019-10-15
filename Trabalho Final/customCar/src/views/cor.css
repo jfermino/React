@@ -1,0 +1,51 @@
+.cor-row {
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.cor-row-item {
+    margin-left: 0.75%;
+    margin-right: 0.75%;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(29, 31, 32, 0.15), 0 4px 8px 0 rgba(29, 31, 32, 0.15);
+    margin-bottom: 2.5%;
+    position: relative;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+}
+
+.cor-row-item:hover{
+    box-shadow: 0 1px 2px 0 rgba(29, 31, 32, 0.15), 0 6px 12px 0 rgba(29, 31, 32, 0.3);
+}
+
+.cor-row-item img {
+    display: inline-block;
+    width: 40%;
+    max-width: 112px;
+    opacity: 1;
+    border-radius: 4px;
+    top: 10px;
+    position: relative;
+}
+
+.cor-row-item__preco {
+    position: absolute;
+    right: 30%;
+    top: 12px;
+}
+
+.cor-row__title {
+    margin-left: 10%;
+}
+
+.cor-row-item__nome {
+    margin-top: 10px;
+}
+
+.cor-body__title {
+    text-align: center;
+}
