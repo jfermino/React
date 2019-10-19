@@ -9,12 +9,18 @@ import Versao from './views/versao';
 import Cor from './views/cor';
 import modeloReducer from './reducers/modeloReducer';
 import versaoReducer from './reducers/versaoReducer';
-import corReducer from './reducers/corReducer'
+import corReducer from './reducers/corReducer';
+import opcionaisReducer from './reducers/opcionaisReducer';
+import Opcionais from './views/opcionais';
+import Resumo from './views/resumo';
+
 
 const reducers = combineReducers({
     modelo : modeloReducer,
     versao: versaoReducer,
-    cor: corReducer
+    cor: corReducer,
+    opcionais: opcionaisReducer
+
 });
 
 class App extends Component {
@@ -31,9 +37,8 @@ class App extends Component {
             <Route path="/" exact component={Modelo} />
             <Route path="/versao/:id" exact component={Versao} />
             <Route path="/cor" exact component={Cor} />
-            {/* <Route path="/prod" exact component={ProdutoList} />
-            <Route path="/prod/:id" component={ProdutoDetail} />
-            <Route path="/cart" component={Carrinho} /> */}
+            <Route path="/opcionais" exact component={Opcionais}/>
+            <Route path="/resumo" exact component={Resumo} />
           </div>
         </Router>
       </div>
@@ -43,3 +48,4 @@ class App extends Component {
 }
 
 export default App;
+

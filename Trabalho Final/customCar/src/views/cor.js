@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CorItem from '../components/corItem'
-import { Link } from "react-router-dom";
+import CorItem from '../components/corItem';
 import './cor.css'
+
 
 
 class Cor extends Component {
@@ -10,9 +10,31 @@ class Cor extends Component {
         super(props);
     }
 
+    buscarCoresPorTipo(tipo) {
+        let NomeTipo = " ";
+        if(tipo == 1)
+            NomeTipo = "Sólida"
+        else if(tipo == 2)
+            NomeTipo = "Metálica"
+
+        let listCorSolida = this.props.listCor.Cores.filter(c=> c.tipo ==tipo && c.versao.includes(this.props.versao.VersaoSelecionada.id));
+        if(listCorSolida.length > 0){
+            return(
+                <div>
+                    <div className="cor-row__title">
+                            <h4>{NomeTipo}</h4>
+                        </div>
+                        <section className="row cor-row">
+                            {this.props.listCor.Cores.filter(c=> c.tipo ==tipo && c.versao.includes(this.props.versao.VersaoSelecionada.id)).map(c => (
+                                <CorItem item={c} history={this.props.history}/>
+                            ))}
+                        </section>
+                </div>
+            )
+        }
+    }
+
     render() {
-        console.log("Listando cores");
-        console.log(this.props.listCor);
         return (
             <div className="container">
                 <div className="cor">
@@ -20,25 +42,10 @@ class Cor extends Component {
                         <h3>Escolha sua cor</h3>
                     </div>
                     <div className="cor-row">
-                        <div className="cor-row__title">
-                            <h4>Metalica</h4>
-                        </div>
-                        <section className="row cor-row">
-                            {/* TODO: Fazer filtro de seleção de cor por versão */}
-                            {this.props.listCor.Cores.filter(c=> c.tipo ==2).map(c => (
-                                <CorItem item={c} />
-                            ))}
-                        </section>
+                       {this.buscarCoresPorTipo(1)}
                     </div>
                     <div className="cor-row">
-                        <div className="cor-row__title">
-                            <h4>Sólida</h4>
-                        </div>
-                        <section className="row cor-row">
-                        {this.props.listCor.Cores.filter(c=> c.tipo ==1).map(c => (
-                                <CorItem item={c} />
-                            ))}
-                        </section>
+                        {this.buscarCoresPorTipo(2)}
                     </div>
                 </div>
             </div>
@@ -48,10 +55,11 @@ class Cor extends Component {
 
 function mapStateToProps(state) {
     return {
-        listCor: state.cor
+        listCor: state.cor,
+        versao: state.versao
     }
 }
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
 )(Cor)
